@@ -1,17 +1,19 @@
-var MyExpress = require('..')
-var serveStatic = require('serve-static')
-var path = require('path')
+const MyExpress = require('./lib/MyExpress')
+const serveStatic = require('serve-static')
+const path = require('path')
 
-var app = MyExpress()
+let app = MyExpress()
 
 // Add static server
-app.use(serveStatic(path.join(__dirname, '/public'), {
+app.use(serveStatic(path.join(__dirname, '/public/dist'), {
   maxAge: '1d',
   setHeaders: setCustomCacheControl
 }))
 
 
-app.listen(3000)
+app.listen(8080, () => {
+  console.log('listen port 8080')
+})
 
 function setCustomCacheControl (res, path) {
   if (serveStatic.mime.lookup(path) === 'text/html') {
