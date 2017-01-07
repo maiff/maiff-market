@@ -1,12 +1,11 @@
-const log4js = require('log4js')
+const logger = require('./log/log')
 const MyExpress = require('./lib/MyExpress')
 const serveStatic = require('serve-static')
 const path = require('path')
 
-const port = 8080
+const port = 30002
 
-var logger = log4js.getLogger('maiff-market')
-logger.setLevel('trace')
+
 
 let app = MyExpress()
 
@@ -15,6 +14,14 @@ app.use(serveStatic(path.join(__dirname, '/public/dist'), {
   maxAge: '1d',
   setHeaders: setCustomCacheControl
 }))
+
+const regist = require('./registration/registRoute')
+
+app.use('/regist', regist)
+
+
+
+
 
 app.listen(port, () => {
   logger.trace(`listen on ${port}`)

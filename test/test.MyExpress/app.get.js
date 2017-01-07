@@ -34,6 +34,21 @@ describe('app.get()', function(){
 
   });
 
+  it('get without router ', function(done){
+    var app = connect();
+
+    app.get(function (req, res) {
+      res.end();
+    });
+
+    app.listen(0, function(){
+      request(app)
+      .get('/')
+      .expect(200, done);
+    });
+
+  });
+
 
   it('only to get is initing ', function(done){
     var app = connect();
