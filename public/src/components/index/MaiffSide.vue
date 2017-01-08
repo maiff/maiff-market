@@ -1,12 +1,24 @@
 <template>
-   <aside><h2>Side Menu</h2></aside>
+   <aside>
+     <div class="container">
+        <MaiffSideUser></MaiffSideUser>
+        <hr>
+        <OptionContainer></OptionContainer>
+     </div>
+   </aside>
 </template>
 
 
 
 <script>
+import MaiffSideUser from './MaiffSideUser'
+import OptionContainer from './OptionContainer'
 export default {
-  name: 'maiffSide'
+  name: 'maiffSide',
+  components: {
+    MaiffSideUser,
+    OptionContainer
+  }
 }
 </script>
 
@@ -23,5 +35,11 @@ aside{
     transition:0.2s ease-out; 
     -webkit-transition:0.2s ease-out; 
     z-index:$sideZIndex;
+}
+.container{
+    margin: 20px;
+      hr{
+        margin-top: 20px;
+      }
 }
 </style>
