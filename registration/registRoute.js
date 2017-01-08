@@ -6,7 +6,7 @@ const getID = require('./getID')
 router.use(bodyParser.urlencoded({ extended: false }))
 router.use(sendJson())
 
-const userIdIsOnly = require('./userIdIsOnly')
+const fieldIsOnly = require('./fieldIsOnly')
 const saveUserInformation = require('./saveUserInformation')
 router.post((req, res) => {
   // console.log(req.body)
@@ -19,19 +19,24 @@ router.post((req, res) => {
 
   if (user.userId && user.password && user.studentNum && user.idCardNum) {
     getID(user.studentNum, (err, id) => {
-
-      console.log(id)
+      // console.log(id)
       if (err) res.json(err)
       if (user.idCardNum === id.slice(-6, 18)) {
-        userIdIsOnly(user, (is) => {
-          is && saveUserInformation(user, (err, user) => {
-            if (err) {
-              res.json(err)
-            } else {
-              res.json({
-                status: 1 // 成功
-              })
-            }
+        fieldIsOnly({userId: user.userId}, (is) => {
+          is && fieldIsOnly({studentNum: user.studentNum}, (is) => {
+            is && saveUserInformation(user, (err, user) => {
+              if (err) {
+                res.json(err)
+              } else {
+                res.json({
+                  status: 1 // 成功
+                })
+              }
+            })
+
+            is || res.json({
+              status: -3// 学号已被注册
+            })
           })
 
           is || res.json({

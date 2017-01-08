@@ -2,8 +2,8 @@ const UserModel = require('./userModel')
 
 const logger = require('../log/log')
 
-module.exports = (userInformation, fn) => {
-  UserModel.findOne({ 'userId': userInformation.userId }, (err, user) => {
+module.exports = (obj, fn) => {
+  UserModel.findOne(obj, (err, user) => {
     if (err) {
       logger.error(err)
     } else {

@@ -17,9 +17,9 @@ aside{
     position:absolute; 
     top:0; 
     bottom:0; 
-    left:-200px; 
-    width:50%; 
-    background:#f1103a; 
+    left:-60%; 
+    width:60%; 
+    background:#fff; 
     transition:0.2s ease-out; 
     -webkit-transition:0.2s ease-out; 
     z-index:$sideZIndex;

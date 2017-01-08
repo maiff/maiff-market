@@ -2,7 +2,7 @@ const fieldIsOnly = require('../../registration/fieldIsOnly')
 const saveUserInformation = require('../../registration/saveUserInformation')
 const assert = require('assert')
 
-describe('userId only', () => {
+describe('studentNum only', () => {
   it.skip('return false ', (done) => {
     let userInformation = {
       userId: 'admin',
@@ -12,7 +12,7 @@ describe('userId only', () => {
     }
     saveUserInformation(userInformation, (err, user) => {
       if (err) done(err)
-      fieldIsOnly({userId: userInformation.userId}, (is) => {
+      fieldIsOnly({studentNum: userInformation.studentNum}, (is) => {
         assert.equal(is, false)
         user.remove()
         done()
@@ -24,10 +24,10 @@ describe('userId only', () => {
     let userInformation = {
       userId: 'notExit',
       password: '2101239xwt',
-      studentNum: '141320231',
+      studentNum: 'notExit',
       idCardNum: '627261'
     }
-    fieldIsOnly({userId: userInformation.userId}, (is) => {
+    fieldIsOnly({studentNum: userInformation.studentNum}, (is) => {
       assert.equal(is, true)
       done()
     })
