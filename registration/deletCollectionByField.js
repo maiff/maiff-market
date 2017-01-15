@@ -1,13 +1,10 @@
-const UserModel = require('./userModel')
-const logger = require('../log/log')
+const findOne = require('./findOne')
 
-module.exports = (obj, fn) => {
-  UserModel.findOne(obj, (err, user) => {
-    if (err) {
-      logger.error(err)
-    } else {
+module.exports = (obj) => {
+  return new Promise((resolve, reject) => {
+    findOne(obj).then((user) => {
       user.remove()
-      fn && fn(null, user)
-    }
+      resolve(user)
+    }, reject)
   })
 }

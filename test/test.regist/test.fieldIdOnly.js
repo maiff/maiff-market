@@ -10,14 +10,13 @@ describe('userId only', () => {
       studentNum: '141320231',
       idCardNum: '627261'
     }
-    saveUserInformation(userInformation, (err, user) => {
-      if (err) done(err)
-      fieldIsOnly({userId: userInformation.userId}, (is) => {
+    saveUserInformation(userInformation).then((user) => {
+      fieldIsOnly({userId: userInformation.userId}).then((is) => {
         assert.equal(is, false)
         user.remove()
         done()
-      })
-    })
+      }, done)
+    }, done)
   })
 
   it.skip('return true ', (done) => {
@@ -27,9 +26,9 @@ describe('userId only', () => {
       studentNum: '141320231',
       idCardNum: '627261'
     }
-    fieldIsOnly({userId: userInformation.userId}, (is) => {
+    fieldIsOnly({userId: userInformation.userId}).then((is) => {
       assert.equal(is, true)
       done()
-    })
+    }, done)
   })
 })

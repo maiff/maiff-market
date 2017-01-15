@@ -8,16 +8,14 @@ describe('db save user information', () => {
       studentNum: '141320231',
       idCardNum: '627261'
     }
-    saveUserInformation(userInformation, (err, user) => {
-      if (err) done(err)
+    saveUserInformation(userInformation).then((user) => {
       done()
-    })
+    }, done)
   })
-
   it('delete information', (done) => {
-    deletCollectionByField({userId: 'admin'}, (err, user) => {
-      if (err) done(err)
+    deletCollectionByField({userId: 'admin'}).then((user) => {
       done()
-    })
+    }, done)
   })
 })
+
