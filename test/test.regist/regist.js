@@ -28,7 +28,7 @@ describe('registration', () => {
     })
   })
 
-  it('regist fail without some field', (done) => {
+  it('regist fail without password', (done) => {
     let app = connect()
     app.use('/regist', registRounter)
     app.listen(0, function () {
@@ -44,7 +44,7 @@ describe('registration', () => {
       .expect(200)
       .end((err, res) => {
         if (err) return done(err)
-        assert.equal(res.text, JSON.stringify({status: -1}))
+        assert.equal(JSON.parse(res.text).status, -2)
         done()
       })
     })
@@ -67,7 +67,7 @@ describe('registration', () => {
       .expect(200)
       .end((err, res) => {
         if (err) return done(err)
-        assert.equal(res.text, JSON.stringify({status: -2}))
+        assert.equal(res.text, JSON.stringify({status: -5}))
         done()
       })
     })
@@ -112,7 +112,7 @@ describe('registration', () => {
             .expect(200)
             .end((err, res) => {
               if (err) return done(err)
-              assert.equal(res.text, JSON.stringify({status: -3}))
+              assert.equal(res.text, JSON.stringify({status: -6}))
               deletCollectionByField({userId: 'test'})
               done()
             })

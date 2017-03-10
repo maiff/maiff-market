@@ -16,10 +16,13 @@ app.use(serveStatic(path.join(__dirname, '/public/dist'), {
 }))
 
 const regist = require('./registration/registRoute')
-
 app.use('/regist', regist)
 
+const loginRegist = require('./login/loginCodeRegister')
+app.use('/loginRegist', loginRegist)
 
+const login = require('./login/loginRoute')
+app.use('/login', login)
 
 
 

@@ -1,12 +1,12 @@
 const UserModel = require('./userModel')
 const logger = require('../log/log')
-
+const hash = require('../lib/hash')
 
 
 module.exports = (userInformation) => {
   let user = new UserModel({
     userId: userInformation.userId,
-    password: userInformation.password,
+    password: hash(userInformation.password),
     studentNum: userInformation.studentNum,
     idCardNum: userInformation.idCardNum
   })

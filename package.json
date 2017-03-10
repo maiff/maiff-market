@@ -25,6 +25,7 @@
     "chai": "^3.5.0",
     "cheerio": "^0.22.0",
     "finalhandler": "^0.5.1",
+    "geetest": "^4.1.1",
     "istanbul": "^0.4.5",
     "log4js": "^1.1.0",
     "mocha": "^3.2.0",
