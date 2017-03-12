@@ -12,6 +12,27 @@
   font-style:normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  cursor: pointer;
 }
 
 .icon-menu:before { content: "\e745"; }
+
+
+@font-face {font-family: "arrow";
+  src: url('../../fonts/arrow.eot?t=1489235041238'); /* IE9*/
+  src: url('../../fonts/arrow.eot?t=1489235041238#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../../fonts/arrow.woff?t=1489235041238') format('woff'), /* chrome, firefox */
+  url('../../fonts/arrow.ttf?t=1489235041238') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('../../fonts/arrow.svg?t=1489235041238#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.arrow {
+  font-family:"arrow" !important;
+  font-size:18px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: pointer;
+}
+
+.icon-arrow-copy:before { content: "\e67c"; }

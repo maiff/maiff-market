@@ -1,0 +1,25 @@
+<template>
+  <div class="login">  
+      <MaiffMask></MaiffMask>
+      <CommonHead title="登录"></CommonHead>
+      <LoginForm></LoginForm>
+  </div>
+</template>
+
+<script>
+import CommonHead from './common/CommonHead'
+import LoginForm from './login/LoginForm'
+import MaiffMask from './common/MaiffMask'
+export default {
+  name: 'login',
+  components: {
+    CommonHead,
+    LoginForm,
+    MaiffMask
+  }
+}
+</script>
+
+<style lang="scss">
+
+</style>
