@@ -3,11 +3,11 @@
     <form id="form" v-on:submit.prevent="login">
       <div class="input-field">
         <label>用户名：</label>
-        <input type="text" v-model="newUser.username" placeholder="username">
+        <input type="text"  placeholder="username" v-model="username">
       </div>
       <div class="input-field">
-        <label>密&nbsp;&nbsp;&nbsp;码：</label>
-        <input type="password" v-model="newUser.password" placeholder="password">
+        <label>密&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
+        <input type="password"  placeholder="password" v-model="password">
       </div>
       <input type="submit" value="登录" >
       <div class="login-choose">
@@ -15,33 +15,34 @@
         &nbsp;&nbsp;&nbsp;&nbsp;
         <a href="">忘了密码？</a>
       </div>
-      <div id="popup-captcha-mobile"></div>
     </form> 
   </div>
 </template>
 
 <script>
-import axios from 'axios'
-// import initGeetest from 'initGeetest'
-axios.get(`/loginRegist?${(new Date()).getTime()}`)
-     .then(function (response) {
-       console.log(response)
-     })
-export default {
+import code from './code.js'
+let newUser = {
+  username: '',
+  password: ''
+}
+let vm = {
   name: 'loginForm',
   data () {
     return {
-      newUser: {
-        username: '',
-        password: ''
-      }
+      newUser: newUser
     }
   },
   computed: {
+    getAuto () {
+      return {
+        username: this.newUser.username,
+        password: this.newUser.password
+      }
+    },
     validation: function () {
       return {
         name: !!this.newUser.username.trim(),
-        email: !!this.newUser.password
+        password: !!this.newUser.password
       }
     },
     isValid: function () {
@@ -49,6 +50,25 @@ export default {
       return Object.keys(validation).every(function (key) {
         return validation[key]
       })
+    },
+    isShow () {
+      return this.$store.state.mask.maskIsShow
+    },
+    username: {
+      get () {
+        return this.$store.state.autoInfo.username
+      },
+      set (value) {
+        this.$store.commit('updateUsername', value)
+      }
+    },
+    password: {
+      get () {
+        return this.$store.state.autoInfo.password
+      },
+      set (value) {
+        this.$store.commit('updatePassword', value)
+      }
     }
   },
   methods: {
@@ -57,9 +77,17 @@ export default {
     },
     login: function () {
       this.toggleMask()
+      this.$store.state.mask.maskIsShow && code((res) => {
+        // console.log(data.status)
+        // console.log(data)
+        if (res.data.status === 'success') {
+          document.body.innerHTML = '登录成功！'
+        }
+      })
     }
   }
 }
+export default vm
 </script>
 <style lang="scss" scoped>
     @import "../../assets/sass_tool/base.scss";
@@ -67,9 +95,9 @@ export default {
     @import "../../assets/sass_tool/_center.scss";
     form{
       position: relative;
-      @include center();
+     
       width: 90%;
-      margin-top: -10%;
+      margin: 36% auto;
       .input-field{
         margin: 30px 0;
         overflow: hidden;
@@ -107,12 +135,4 @@ export default {
       }
     }
 
-    #popup-captcha-mobile {
-      position: fixed;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      -webkit-transform: translate(-50%, -50%);
-      z-index: 9999;
-    }
 </style>

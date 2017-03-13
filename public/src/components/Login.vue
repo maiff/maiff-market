@@ -1,5 +1,6 @@
 <template>
-  <div class="login">  
+  <div class="login">
+      <VerifyCode></VerifyCode>  
       <MaiffMask></MaiffMask>
       <CommonHead title="登录"></CommonHead>
       <LoginForm></LoginForm>
@@ -10,12 +11,14 @@
 import CommonHead from './common/CommonHead'
 import LoginForm from './login/LoginForm'
 import MaiffMask from './common/MaiffMask'
+import VerifyCode from './common/VerifyCode'
 export default {
   name: 'login',
   components: {
     CommonHead,
     LoginForm,
-    MaiffMask
+    MaiffMask,
+    VerifyCode
   }
 }
 </script>

@@ -15,6 +15,7 @@ let OnlineUser = require('./onlineUser')
 let onlineUser = new OnlineUser()
 router.post((req, res) => {
    // 对ajax提供的验证凭证进行二次验证
+  res.setHeader('Access-Control-Allow-Origin', '*')
   let username = req.body.username
   let password = req.body.password
   mobileGeetest.validate({
@@ -39,12 +40,17 @@ router.post((req, res) => {
   }).then((success) => {
     return find({userId: username})
   }).then((user) => {
-    if (hash(password) === user.password) {
+    if (user && hash(password) === user.password) {
       let key = onlineUser.add(username)
       // console.log(onlineUser.get(key).username)
       res.json({
         status: 'success',
         info: key
+      })
+    } else {
+      res.json({
+        status: 'fail',
+        info: '账号密码错误'
       })
     }
   }, (err) => {

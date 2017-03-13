@@ -1,6 +1,6 @@
 <template>
   <header>
-    <span class="back">
+    <span class="back" @click="back()">
         <i class="arrow icon-arrow-copy"></i>
     </span>
     <span class="title">
@@ -15,7 +15,12 @@ export default {
   data () {
     return {}
   },
-  props: ['title']
+  props: ['title'],
+  methods: {
+    back () {
+      window.history.go(-1)
+    }
+  }
 }
 </script>
 
@@ -37,7 +42,7 @@ export default {
         }
         .back{
           float: left;
-          margin-left: 20px;
+          padding-left: 20px;
         }
 
 }

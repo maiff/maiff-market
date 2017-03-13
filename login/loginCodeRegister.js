@@ -7,6 +7,7 @@ router.use(bodyParser.urlencoded({ extended: false }))
 
 let mobileGeetest = require('../geetestKey')
 router.get(function (req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*')
     // 向极验申请每次验证所需的challenge
   mobileGeetest.register().then(function (data) {
     if (!data.success) {

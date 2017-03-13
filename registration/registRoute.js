@@ -15,6 +15,7 @@ const saveUserInformation = require('./saveUserInformation')
 
 
 router.post((req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*')
   // console.log(req.body)
   let body = req.body
   let user = {}
