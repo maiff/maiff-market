@@ -2,7 +2,8 @@ const autoInfo = {
   state: {
     username: '',
     password: '',
-    captchaObj: null
+    captchaObj: null,
+    isLogined: false
   },
   mutations: {
     updateUsername (state, value) {
@@ -13,6 +14,9 @@ const autoInfo = {
     },
     setCaptchaObj (state, obj) {
       state.captchaObj = obj
+    },
+    login (state) {
+      state.isLogined = true
     }
 
   }

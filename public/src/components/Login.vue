@@ -19,6 +19,11 @@ export default {
     LoginForm,
     MaiffMask,
     VerifyCode
+  },
+  beforeCreate () {
+    if (this.$store.state.autoInfo.isLogined === true) {
+      this.$router.push('/')
+    }
   }
 }
 </script>

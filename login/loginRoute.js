@@ -11,8 +11,8 @@ const hash = require('../lib/hash')
 
 const find = require('../registration/findOne')
 
-let OnlineUser = require('./onlineUser')
-let onlineUser = new OnlineUser()
+let onlineUser = require('./onlineUser')
+
 router.post((req, res) => {
    // 对ajax提供的验证凭证进行二次验证
   res.setHeader('Access-Control-Allow-Origin', '*')

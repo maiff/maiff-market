@@ -8,11 +8,19 @@
 import Index from './components/Index'
 import Login from './components/Login'
 
+import Cookies from 'js.cookie'
+
 export default {
   name: 'app',
   components: {
     Index,
     Login
+  },
+  beforeCreate () {
+    if (this.$store.state.autoInfo.isLogined === false && Cookies.get('sessionId') !== null) {
+      console.log('check')
+      this.$store.commit('login')
+    }
   }
 }
 </script>

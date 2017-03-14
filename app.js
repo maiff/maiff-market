@@ -22,8 +22,9 @@ const loginRegist = require('./login/loginCodeRegister')
 app.use('/loginRegist', loginRegist)
 
 const login = require('./login/loginRoute')
+const isLogin = require('./login/isLoginRoute')
 app.use('/login', login)
-
+app.use('/isLogin', isLogin)
 
 
 app.listen(port, () => {

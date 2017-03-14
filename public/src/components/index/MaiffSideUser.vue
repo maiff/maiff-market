@@ -1,10 +1,12 @@
 <template>
    <div class="user-container">
-      <h4>maiff</h4>
-      <router-link to="/login">
+      <h4>测试用户</h4>
+      <router-link to="/login" v-show="isShow">
         <h4><a href="">登录</a></h4>
       </router-link>
-      <h4><a href="">注册</a></h4>
+       <router-link to="/register" v-show="isShow">
+        <h4><a href="">注册</a></h4>
+      </router-link>
    </div>
 </template>
 
@@ -12,7 +14,12 @@
 
 <script>
 export default {
-  name: 'maiffSideUser'
+  name: 'maiffSideUser',
+  computed: {
+    isShow () {
+      return !this.$store.state.autoInfo.isLogined
+    }
+  }
 }
 </script>
 

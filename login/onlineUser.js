@@ -1,6 +1,6 @@
 const hash = require('../lib/hash')
 
-class onlineUser {
+class OnlineUser {
   constructor () {
     this.allUser = {}
     this.checkStatus()
@@ -49,5 +49,5 @@ class onlineUser {
     }, timeGap)
   }
 }
-
+let onlineUser = new OnlineUser()
 module.exports = onlineUser

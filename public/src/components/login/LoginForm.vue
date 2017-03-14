@@ -21,6 +21,8 @@
 
 <script>
 import code from './code.js'
+import Cookies from 'js.cookie'
+// import router from '../../router'
 let newUser = {
   username: '',
   password: ''
@@ -81,7 +83,9 @@ let vm = {
         // console.log(data.status)
         // console.log(data)
         if (res.data.status === 'success') {
-          document.body.innerHTML = '登录成功！'
+          this.$store.commit('login')
+          Cookies.set('sessionId', 'res.data.info')
+          this.$router.push('/')
         }
       })
     }
