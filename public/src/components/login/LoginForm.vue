@@ -93,9 +93,9 @@ export default vm
     @import "../../assets/sass_tool/base.scss";
     @import "../../assets/sass_tool/_size.scss";
     @import "../../assets/sass_tool/_center.scss";
+   
     form{
       position: relative;
-     
       width: 90%;
       margin: 36% auto;
       .input-field{
@@ -134,5 +134,10 @@ export default vm
         }
       }
     }
-
+    @media  (min-width: 450px){
+      form{
+          @include center();
+          margin: 0 !important;
+      }
+    }
 </style>

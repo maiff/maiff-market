@@ -39,12 +39,14 @@ class onlineUser {
     setInterval(() => {
       let nowTime = new Date().getTime()
       for (let i in allUser) {
-        if (allUser[i]===undefined || nowTime - allUser[i].lastUse > timeGap) {
-          allUser[i] = undefined
+        if (allUser[i] === undefined || nowTime - allUser[i].lastUse > timeGap) {
+          // allUser[i] = undefined
+          // console.log(this.allUser)
+          delete allUser[i]
           // console.log(this.allUser)
         }
       }
-    }, 1000 * 60 * 60)
+    }, timeGap)
   }
 }
 
