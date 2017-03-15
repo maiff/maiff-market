@@ -19,7 +19,7 @@ let handlerPopupMobile = function (captchaObj, fn) {
       geetest_challenge: validate.geetest_challenge,
       geetest_validate: validate.geetest_validate,
       geetest_seccode: validate.geetest_seccode,
-      username: store.state.autoInfo.username,
+      studentNum: store.state.autoInfo.stuNum,
       password: store.state.autoInfo.password
     },
       {

@@ -1,21 +1,26 @@
 const autoInfo = {
   state: {
-    username: '',
+    stuNum: '',
     password: '',
     captchaObj: null,
-    isLogined: false
+    isLogined: false,
+    name: '请登录'
   },
   mutations: {
-    updateUsername (state, value) {
-      state.username = value
+    updateStuNum (state, value) {
+      state.stuNum = value
     },
     updatePassword (state, value) {
       state.password = value
     },
+    updateName (state, value) {
+      state.name = value
+    },
     setCaptchaObj (state, obj) {
       state.captchaObj = obj
     },
-    login (state) {
+    login (state, value) {
+      state.name = value
       state.isLogined = true
     }
 

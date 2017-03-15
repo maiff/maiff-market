@@ -4,7 +4,6 @@ import store from '../../store/'
 
 function registPost (fn) {
   axios.post(`${baseUrl}/regist`, {
-    userId: store.state.register.username,
     studentNum: store.state.register.stuNum,
     idCardNum: store.state.register.idCard,
     password: store.state.register.password

@@ -16,7 +16,7 @@ let onlineUser = require('./onlineUser')
 router.post((req, res) => {
    // 对ajax提供的验证凭证进行二次验证
   res.setHeader('Access-Control-Allow-Origin', '*')
-  let username = req.body.username
+  let studentNum = req.body.studentNum
   let password = req.body.password
   mobileGeetest.validate({
     challenge: req.body.geetest_challenge,
@@ -38,14 +38,15 @@ router.post((req, res) => {
       info: err
     })
   }).then((success) => {
-    return find({userId: username})
+    return find({studentNum: studentNum})
   }).then((user) => {
     if (user && hash(password) === user.password) {
-      let key = onlineUser.add(username)
+      let key = onlineUser.add(studentNum)
       // console.log(onlineUser.get(key).username)
       res.json({
         status: 'success',
-        info: key
+        info: key,
+        name: user.name
       })
     } else {
       res.json({

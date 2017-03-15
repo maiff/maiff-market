@@ -7,6 +7,7 @@ let Form = require('../lib/node-form-comfirm')
 const logger = require('../log/log')
 
 const getID = require('./getID')
+const getName = require('./getName')
 router.use(bodyParser.urlencoded({ extended: false }))
 router.use(sendJson())
 
@@ -19,7 +20,6 @@ router.post((req, res) => {
   // console.log(req.body)
   let body = req.body
   let user = {}
-  user.userId = body.userId
   user.password = body.password
   user.studentNum = body.studentNum
   user.idCardNum = body.idCardNum
@@ -35,11 +35,7 @@ router.post((req, res) => {
     }
   })
 
-  form.add(user.userId, {
-    label: '用户id',
-    validators: ['required'],
-    code: -1 // 缺少用户id
-  }).add(user.password, {
+  form.add(user.password, {
     label: '密码',
     validators: ['required', 'isPassword'],
     code: -2 // 缺少密码，或者不符合规则
@@ -62,7 +58,7 @@ router.post((req, res) => {
   form.validate(() => {
     getID(user.studentNum).then((id) => {
       if (user.idCardNum === id.slice(-6, 18)) {
-        return fieldIsOnly({userId: user.userId})
+        return getName(user.studentNum)
       } else {
         res.json({
           status: -5, // 学号身份证后六位不匹配
@@ -72,14 +68,12 @@ router.post((req, res) => {
       }
     }, (err) => {
       res.json(err)
-    }).then((is) => {
+    }).then((name) => {
+      user.name = name
       return fieldIsOnly({studentNum: user.studentNum})
-    }, (is) => {
-      res.json({
-        status: 0, // 用户名已被注册
-        msg: '用户名已被注册'
-      })
-      throw new Error('用户名已被注册')
+    }, (err) => {
+      res.json(err)
+      throw new Error('获取名字出错')
     }).then((is) => {
       return saveUserInformation(user)
     }, (is) => {

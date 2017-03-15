@@ -12,7 +12,8 @@ router.get((req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
   // console.log('Cookies: ', req.cookies)
   let cookies = req.cookies
-  let userObj = onlineUser.get(cookies['sessionId'])
+  console.log(cookies['sessionId'].replace(/"/g, ''))
+  let userObj = onlineUser.get(cookies['sessionId'].replace(/"/g, ''))
   if (userObj !== undefined) {
     res.json({
       status: 1

@@ -17,9 +17,9 @@ export default {
     Login
   },
   beforeCreate () {
-    if (this.$store.state.autoInfo.isLogined === false && Cookies.get('sessionId') !== null) {
+    if (this.$store.state.autoInfo.isLogined === false && Cookies.get('sessionId') !== null && Cookies.get('name') !== null) {
       // console.log('check')
-      this.$store.commit('login')
+      this.$store.commit('login', Cookies.get('name'))
     }
   }
 }

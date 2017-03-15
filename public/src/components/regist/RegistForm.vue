@@ -2,10 +2,6 @@
   <div>
     <form id="form" v-on:submit.prevent="regist">
       <div class="input-field">
-        <label>用户名：</label>
-        <input type="text"  placeholder="username" v-model="username">
-      </div>
-      <div class="input-field">
         <label>密&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
         <input type="password"  placeholder="password" v-model="password">
       </div>
@@ -40,22 +36,12 @@ export default {
   },
   computed: {
     validation: function () {
-      let usernameRE = /^[_\-a-zA-Z]\w+$/
       let passwordRE = /[a-zA-Z]/
       return {
-        name: usernameRE.test(this.username.trim()) && this.username.length > 4 && this.username.length <= 15,
-        password: passwordRE.test(this.password) && this.username.length >= 6 && this.username.length < 20,
+        password: passwordRE.test(this.password) && this.password.length >= 6 && this.password.length < 20,
         comfirePassword: this.comfirePassword === this.password,
         stuNum: !!this.stuNum.trim(),
         idCard: this.idCard.length === 6
-      }
-    },
-    username: {
-      get () {
-        return this.$store.state.register.username
-      },
-      set (value) {
-        this.$store.commit('setUsername', value)
       }
     },
     password: {

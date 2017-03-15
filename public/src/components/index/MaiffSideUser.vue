@@ -1,6 +1,6 @@
 <template>
    <div class="user-container">
-      <h4>测试用户</h4>
+      <h4>{{name}}</h4>
       <router-link to="/login" v-show="isShow">
         <h4><a href="">登录</a></h4>
       </router-link>
@@ -18,6 +18,9 @@ export default {
   computed: {
     isShow () {
       return !this.$store.state.autoInfo.isLogined
+    },
+    name () {
+      return this.$store.state.autoInfo.name
     }
   }
 }

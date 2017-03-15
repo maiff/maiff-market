@@ -2,8 +2,8 @@
   <div>
     <form id="form" v-on:submit.prevent="login">
       <div class="input-field">
-        <label>用户名：</label>
-        <input type="text"  placeholder="username" v-model="username">
+        <label>学&nbsp;&nbsp;&nbsp;&nbsp;号：</label>
+        <input type="number"  placeholder="student number" v-model="stuNum">
       </div>
       <div class="input-field">
         <label>密&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
@@ -29,7 +29,7 @@ let vm = {
   computed: {
     validation: function () {
       return {
-        name: !!this.username.trim(),
+        name: !!this.stuNum.trim(),
         password: !!this.password
       }
     },
@@ -42,12 +42,12 @@ let vm = {
     isShow () {
       return this.$store.state.mask.maskIsShow
     },
-    username: {
+    stuNum: {
       get () {
-        return this.$store.state.autoInfo.username
+        return this.$store.state.autoInfo.stuNum
       },
       set (value) {
-        this.$store.commit('updateUsername', value)
+        this.$store.commit('updateStuNum', '' + value)
       }
     },
     password: {
@@ -69,8 +69,9 @@ let vm = {
         this.$store.state.mask.maskIsShow && code((res) => {
           // console.log(data)
           if (res.data.status === 'success') {
-            this.$store.commit('login')
-            Cookies.set('sessionId', 'res.data.info')
+            this.$store.commit('login', res.data.name)
+            Cookies.set('sessionId', res.data.info)
+            Cookies.set('name', res.data.name)
             window.alert('登录成功')
             this.$router.push('/')
           } else {

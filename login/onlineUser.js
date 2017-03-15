@@ -5,14 +5,14 @@ class OnlineUser {
     this.allUser = {}
     this.checkStatus()
   }
-  add (username) {
+  add (studentNum) {
     let that = this.allUser
-    let key = hash(`${username}${new Date().getTime()}`)
+    let key = hash(`${studentNum}${new Date().getTime()}`)
     that[key] = {
       lastUse: new Date().getTime()
     }
-    let user = username
-    Object.defineProperty(that[key], 'username', {
+    let user = studentNum
+    Object.defineProperty(that[key], 'studentNum', {
       get: function () {
         let nowTime = new Date().getTime()
         let gap = 1000 * 60 * 60

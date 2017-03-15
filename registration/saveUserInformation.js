@@ -5,7 +5,7 @@ const hash = require('../lib/hash')
 
 module.exports = (userInformation) => {
   let user = new UserModel({
-    userId: userInformation.userId,
+    name: userInformation.name,
     password: hash(userInformation.password),
     studentNum: userInformation.studentNum,
     idCardNum: userInformation.idCardNum
@@ -16,7 +16,7 @@ module.exports = (userInformation) => {
         logger.error(err)
         reject(err)
       } else {
-        logger.trace('[' + userInformation.userId + '] saved.')
+        logger.trace('[' + userInformation.name + '] saved.')
         resolve(user)
       }
     })

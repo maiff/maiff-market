@@ -1,14 +1,10 @@
 const register = {
   state: {
-    username: '',
     password: '',
     stuNum: '',
     idCard: ''
   },
   mutations: {
-    setUsername (state, value) {
-      state.username = value
-    },
     setPassword (state, value) {
       state.password = value
     },
