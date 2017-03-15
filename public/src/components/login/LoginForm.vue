@@ -23,28 +23,14 @@
 import code from './code.js'
 import Cookies from 'js.cookie'
 // import router from '../../router'
-let newUser = {
-  username: '',
-  password: ''
-}
+
 let vm = {
   name: 'loginForm',
-  data () {
-    return {
-      newUser: newUser
-    }
-  },
   computed: {
-    getAuto () {
-      return {
-        username: this.newUser.username,
-        password: this.newUser.password
-      }
-    },
     validation: function () {
       return {
-        name: !!this.newUser.username.trim(),
-        password: !!this.newUser.password
+        name: !!this.username.trim(),
+        password: !!this.password
       }
     },
     isValid: function () {
@@ -78,16 +64,22 @@ let vm = {
       this.$store.commit('toggleMaskState')
     },
     login: function () {
-      this.toggleMask()
-      this.$store.state.mask.maskIsShow && code((res) => {
-        // console.log(data.status)
-        // console.log(data)
-        if (res.data.status === 'success') {
-          this.$store.commit('login')
-          Cookies.set('sessionId', 'res.data.info')
-          this.$router.push('/')
-        }
-      })
+      if (this.isValid) {
+        this.toggleMask()
+        this.$store.state.mask.maskIsShow && code((res) => {
+          // console.log(data)
+          if (res.data.status === 'success') {
+            this.$store.commit('login')
+            Cookies.set('sessionId', 'res.data.info')
+            window.alert('登录成功')
+            this.$router.push('/')
+          } else {
+            window.alert('登录失败')
+          }
+        })
+      } else {
+        window.alert('用户名或者密码不能为空')
+      }
     }
   }
 }

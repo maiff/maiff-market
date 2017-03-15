@@ -1,7 +1,7 @@
 import baseUrl from '../common/baseUrl.js'
 import axios from 'axios'
-import initGeetest from 'initGeetest'
 import store from '../../store/'
+import initGeetest from 'initGeetest'
 
 let handlerPopupMobile = function (captchaObj, fn) {
         // 将验证码加到id为captcha的元素里

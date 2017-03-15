@@ -65,7 +65,8 @@ router.post((req, res) => {
         return fieldIsOnly({userId: user.userId})
       } else {
         res.json({
-          status: -5 // 学号身份证后六位不匹配
+          status: -5, // 学号身份证后六位不匹配
+          msg: '学号身份证后六位不匹配'
         })
         throw new Error('学号身份证后六位不匹配')
       }
@@ -75,19 +76,22 @@ router.post((req, res) => {
       return fieldIsOnly({studentNum: user.studentNum})
     }, (is) => {
       res.json({
-        status: 0// 用户名已被注册
+        status: 0, // 用户名已被注册
+        msg: '用户名已被注册'
       })
       throw new Error('用户名已被注册')
     }).then((is) => {
       return saveUserInformation(user)
     }, (is) => {
       res.json({
-        status: -6// 学号已被注册
+        status: -6, // 学号已被注册
+        msg: '学号已被注册'
       })
       throw new Error('学号已被注册')
     }).then((user) => {
       res.json({
-        status: 1 // 成功
+        status: 1, // 成功
+        msg: '成功！'
       })
     }, (err) => {
       res.json(err)

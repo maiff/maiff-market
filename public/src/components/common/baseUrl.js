@@ -1,3 +1,3 @@
-let url = 'http://localhost:30002'
+let url = ''
 
 export default url
