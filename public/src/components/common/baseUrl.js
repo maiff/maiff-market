@@ -1,3 +1,3 @@
-let url = ''
+let url = 'test'
 
 export default url
