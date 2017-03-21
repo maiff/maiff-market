@@ -1,26 +1,13 @@
-import baseUrl from '../common/baseUrl.js'
-import axios from 'axios'
+import baseUrl from '../common/baseUrl'
+import post from '../common/post'
 import store from '../../store/'
 
-function registPost (fn) {
-  axios.post(`${baseUrl}/regist`, {
+function registPost () {
+  return post(`${baseUrl}/regist`, {
     studentNum: store.state.register.stuNum,
     idCardNum: store.state.register.idCard,
     password: store.state.register.password
-  },
-    {
-      headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-      transformRequest: [function (data) {
-        // Do whatever you want to transform the data
-        let ret = ''
-        for (let it in data) {
-          ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-        }
-        return ret
-      }]
-    }).then((data) => {
-      fn && fn(data)
-    })
+  })
 }
 
 export default registPost

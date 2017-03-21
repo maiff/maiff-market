@@ -2,20 +2,20 @@
   <div>
     <form id="form" v-on:submit.prevent="regist">
       <div class="input-field">
+        <label>学&nbsp;&nbsp;&nbsp;&nbsp;号：</label>
+        <input type="number"  placeholder="您的学号" v-model="stuNum">
+      </div>
+      <div class="input-field">
         <label>密&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
-        <input type="password"  placeholder="password" v-model="password">
+        <input type="password"  placeholder="密码应该大于六位包含字母" v-model="password">
       </div>
       <div class="input-field">
         <label>确认密码：</label>
-        <input type="password"  placeholder="password" v-model="comfirePassword">
-      </div>
-      <div class="input-field">
-        <label>学&nbsp;&nbsp;&nbsp;&nbsp;号：</label>
-        <input type="number"  placeholder="student number" v-model="stuNum">
+        <input type="password"  placeholder="确认您的密码" v-model="comfirePassword">
       </div>
       <div class="input-field">
         <label id="idcard">身份证后六位：</label>
-        <input type="number"  placeholder="123456" v-model="idCard">
+        <input type="number"  placeholder="与学号匹配" v-model="idCard">
       </div>
       <input type="submit" value="注册" >
       <div class="login-choose">
@@ -73,13 +73,14 @@ export default {
     regist () {
       // console.log(this.isValid)
       if (this.isValid()) {
-        post((res) => {
-          // console.log()
-          if (res.data.status === 1) {
+        post().then((res) => {
+          return res.data
+        }).then((data) => {
+          if (data.status === 1) {
             window.alert('注册成功')
             this.$router.push('/login')
           } else {
-            window.alert(res.data.msg)
+            window.alert(data.msg)
           }
         })
       }
