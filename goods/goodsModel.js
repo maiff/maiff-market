@@ -24,7 +24,8 @@ let good = new Schema({
   detail: String,
   time: String,
   imgUrl: [String],
-  own: String
+  own: String,
+  ownNum: String
 })
 
 let goodsModel = mongoose.model('goodsModel', good)

@@ -1,6 +1,7 @@
 // 导入mongoose库
 const mongoose = require('mongoose')
 
+mongoose.Promise = global.Promise
 // 获得db对象
 let db = mongoose.connection
 

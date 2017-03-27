@@ -6,7 +6,7 @@ qiniu.conf.SECRET_KEY = qiniukey.SK
 
 // 要上传的空间
 const bucket = 'maiff-market-img'
-const baseUrl = 'http://ojawyv8qo.bkt.clouddn.com/'
+
 // 上传到七牛后保存的文件名
 // let key = 'my-nodejs-logo.png'
 
@@ -36,7 +36,7 @@ function uploadFile (uptoken, key, localFile) {
 // 调用uploadFile上传
 module.exports = function (file, saveName) {
   let token = uptoken(bucket, saveName)
-  uploadFile(token, saveName, file)
+  return uploadFile(token, saveName, file)
 }
 
 

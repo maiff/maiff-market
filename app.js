@@ -26,6 +26,11 @@ const isLogin = require('./login/isLoginRoute')
 app.use('/login', login)
 app.use('/isLogin', isLogin)
 
+const uploadImg = require('./goods/uploadImgRoute')
+app.use('/uploadimg', uploadImg)
+
+const addGood = require('./goods/addGoodRoute')
+app.use('/addGood', addGood)
 
 app.listen(port, () => {
   logger.trace(`listen on ${port}`)

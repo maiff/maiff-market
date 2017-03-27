@@ -5,7 +5,7 @@ class OnlineUser {
     this.allUser = {}
     this.checkStatus()
   }
-  add (studentNum) {
+  add (studentNum, stuName) {
     let that = this.allUser
     let key = hash(`${studentNum}${new Date().getTime()}`)
     that[key] = {
@@ -15,15 +15,24 @@ class OnlineUser {
     Object.defineProperty(that[key], 'studentNum', {
       get: function () {
         let nowTime = new Date().getTime()
-        let gap = 1000 * 60 * 60
+        let gap = 60 * 60 * 1000
         // console.log(user)
         if (nowTime - that[key].lastUse > gap) {
           that[key] = undefined
+          return undefined
           // console.log(that[key])
         } else {
+          // console.log(1)
           that[key].lastUse = nowTime
           return user
         }
+      }
+    })
+    let name = stuName
+    Object.defineProperty(that[key], 'name', {
+      get: function () {
+        if (this.studentNum === undefined) return undefined
+        return name
       }
     })
 
@@ -31,7 +40,7 @@ class OnlineUser {
   }
 
   get (key) {
-    return this.allUser[key]
+    return this.allUser[key] || {}
   }
   checkStatus () {
     let timeGap = 1000 * 60 * 60

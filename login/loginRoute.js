@@ -41,7 +41,7 @@ router.post((req, res) => {
     return find({studentNum: studentNum})
   }).then((user) => {
     if (user && hash(password) === user.password) {
-      let key = onlineUser.add(studentNum)
+      let key = onlineUser.add(studentNum, user.name)
       // console.log(onlineUser.get(key).username)
       res.json({
         status: 'success',

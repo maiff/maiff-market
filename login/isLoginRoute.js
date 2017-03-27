@@ -5,22 +5,15 @@ const cookieParser = require('cookie-parser')
 router.use(sendJson())
 router.use(cookieParser())
 
-let onlineUser = require('./onlineUser')
+let isAuto = require('./isAuto')
 // let onlineUser = new OnlineUser()
 router.get((req, res) => {
-   // 对ajax提供的验证凭证进行二次验证
   res.setHeader('Access-Control-Allow-Origin', '*')
-  // console.log('Cookies: ', req.cookies)
-  let cookies = req.cookies
-  console.log(cookies['sessionId'].replace(/"/g, ''))
-  let userObj = onlineUser.get(cookies['sessionId'].replace(/"/g, ''))
-  if (userObj !== undefined) {
+  // console.log('Cookies: ', req)
+  // console.log(sessionId, sessionId.replace(/"/g, ''))
+  if (isAuto(req.cookies, res)) {
     res.json({
       status: 1
-    })
-  } else {
-    res.json({
-      status: 0
     })
   }
   // console.log()
