@@ -1,6 +1,8 @@
 <template>
-  <ul class="options-container">
-    <OptionItem></OptionItem>
+  <ul class="options-container" v-show="isShow">
+    <router-link to="/addgood">
+      <OptionItem content="上传物品"></OptionItem>
+    </router-link>
     <OptionItem></OptionItem>
     <OptionItem></OptionItem>
     <OptionItem></OptionItem>
@@ -16,6 +18,11 @@ export default {
   name: 'optionContainer',
   components: {
     OptionItem
+  },
+  computed: {
+    isShow () {
+      return this.$store.state.autoInfo.isLogined
+    }
   }
 }
 </script>

@@ -7,11 +7,7 @@
 <script>
 export default {
   name: 'optionContainer',
-  data () {
-    return {
-      content: '测试'
-    }
-  }
+  props: ['content']
 }
 </script>
 

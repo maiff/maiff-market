@@ -23,7 +23,6 @@ const autoInfo = {
       state.name = value
       state.isLogined = true
     }
-
   }
 }
 export default autoInfo

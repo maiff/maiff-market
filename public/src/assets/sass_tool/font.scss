@@ -36,3 +36,22 @@
 }
 
 .icon-arrow-copy:before { content: "\e67c"; }
+
+@font-face {font-family: "plus";
+  src: url('../../fonts/plus.eot?t=1489235041238'); /* IE9*/
+  src: url('../../fonts/plus.eot?t=1489235041238#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../../fonts/plus.woff?t=1489235041238') format('woff'), /* chrome, firefox */
+  url('../../fonts/plus.ttf?t=1489235041238') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('../../fonts/plus.svg?t=1489235041238#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.plus {
+  font-family:"plus" !important;
+  font-size:18px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: pointer;
+}
+
+.icon-plus-copy:before { content: "\349a"; }
