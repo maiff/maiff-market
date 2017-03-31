@@ -1,22 +1,24 @@
 <template>
-    <div class="good-item">
-                <div class="container">
-                    <img class="thumbnail" :src="imgUrl">
-                    <div class="center-container">
-                        <h3>{{name}}</h3>
-                        <span class="time">{{time}}</span>
-                        <span class="campus">松江校区</span>
+    <router-link :to="'/good/' + goodId">
+        <div class="good-item">
+                    <div class="container">
+                        <img class="thumbnail" :src="imgUrl">
+                        <div class="center-container">
+                            <h3>{{name}}</h3>
+                            <span class="time">{{time}}</span>
+                            <span class="campus">松江校区</span>
+                        </div>
                     </div>
-                </div>
-                <div class="price">
-                    {{price}}￥
-                </div>
-    </div>
+                    <div class="price">
+                        {{price}}￥
+                    </div>
+        </div>
+    </router-link>
 </template>
 <script>
 export default {
   name: 'goodItem',
-  props: ['name', 'time', 'imgUrl', 'price']
+  props: ['name', 'time', 'imgUrl', 'price', 'goodId']
 }
 </script>
 <style lang="scss" scoped>
@@ -25,6 +27,7 @@ export default {
 @import "../../assets/sass_tool/font.scss";
 @import "../../assets/sass_tool/_center.scss";
 .good-item{
+    color: black;
     @include size(100%,120px);
     display: flex;
     flex-direction: row ;
@@ -75,7 +78,7 @@ export default {
         color:$maincolor;
         margin-right:6%;
         margin-top: -6%;
-        font-size:20px;        
+        font-size:20px;    
     }
 }
 </style>

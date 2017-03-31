@@ -6,11 +6,13 @@ import Index from '../components/Index.vue'
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
 import AddGood from '../components/AddGood.vue'
+import Good from '../components/GoodDetail.vue'
 const routes = [
   {path: '/', component: Index},
   { path: '/login', component: Login },
   { path: '/register', component: Register },
-  { path: '/addgood', component: AddGood }
+  { path: '/addgood', component: AddGood },
+  { path: '/good/:id', component: Good }
 ]
 const router = new VueRouter({
   routes // （缩写）相当于 routes: routes

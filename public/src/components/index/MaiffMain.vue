@@ -1,6 +1,6 @@
 <template>
     <main>
-        <GoodItem v-for="goodItem in goodList" :key="goodItem.id" :price="goodItem.price" :imgUrl="goodItem.imgUrl" :name="goodItem.name" :time="goodItem.time"></GoodItem>
+        <GoodItem v-for="goodItem in goodList" :key="goodItem.id" :price="goodItem.price" :imgUrl="goodItem.imgUrl" :name="goodItem.name" :time="goodItem.time" :goodId="goodItem.id"></GoodItem>
     </main>
 </template>
 
@@ -13,7 +13,7 @@ export default {
     GoodItem
   },
   mounted () {
-    getList().then((res) => {
+    getList(1).then((res) => {
       return res.data
     })
     .then((data) => {
