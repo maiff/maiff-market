@@ -1,11 +1,187 @@
 <template>
+  <main>
+    <div class="img-container">
+      <swiper :options="swiperOption" ref="mySwiper" class="my-swiper">
+        <!-- slides -->
 
+        <swiper-slide v-for="img in imgUrl"><img :src="img" alt="" /></swiper-slide>
+        
+        <!-- Optional controls -->
+        <div class="swiper-pagination"  slot="pagination"></div>
+        <div class="swiper-scrollbar"   slot="scrollbar"></div>
+      </swiper>
+    </div>
+    <div class="name">
+      {{name}}
+    </div>
+    <div class="price">
+        <span>￥</span>{{price}}
+    </div>
+    <div class="time">
+        发布：{{time}}
+    </div>
+    <div class="hr"></div>
+    <div class="contact">
+      <div class="tip" v-show="!show">
+        <p>登录后查看全部</p>
+        <hr>
+      </div>
+      <span class="name">{{ownName}}</span>
+      <span class="value">{{type}}:{{value}}</span>
+    </div>
+    <div class="hr"></div>
+    <dl>
+      <dt>物品详情：</dt>
+      <hr>
+      <dd>{{detail}}</dd>
+    </dl>
+  </main>
 </template>
 
 <script>
+import getDetail from './getDetail.js'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
-  name: 'goodDetail'
+  components: {
+    swiper,
+    swiperSlide
+  },
+  name: 'goodDetail',
+  mounted () {
+    getDetail(this.$route.params.id).then((res) => {
+      return res.data
+    })
+    .then((data) => {
+      ({
+        name: this.name,
+        price: this.price,
+        time: this.time,
+        detail: this.detail
+      } = data)
+      this.ownName = data.own + (this.$store.state.autoInfo.isLogined ? '' : 'XX')
+      this.value = data.contact.is + (this.$store.state.autoInfo.isLogined ? '' : 'XXXXXXXX')
+      this.type = data.contact.what
+      this.imgUrl = data.imgUrl
+    })
+  },
+  data () {
+    return {
+      name: '',
+      price: '',
+      time: '',
+      ownName: '',
+      type: '',
+      value: '',
+      detail: '这家伙很懒什么都没有留下～',
+      imgUrl: ['http://7xpser.com1.z0.glb.clouddn.com/1480223588159.jpg'],
+      swiperOption: {
+        // NotNextTick is a component's own property, and if notNextTick is set to true, the component will not instantiate the swiper through NextTick, which means you can get the swiper object the first time (if you need to use the get swiper object to do what Things, then this property must be true)
+        // notNextTick是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
+        notNextTick: true,
+        // swiper configs 所有的配置同swiper官方api配置
+        autoplay: 3000,
+        direction: 'horizontal',
+        grabCursor: true,
+        setWrapperSize: true,
+        // width: '100%',
+        // height: '100%',
+        // autoHeight: true,
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        prevButton: '.swiper-button-prev',
+        nextButton: '.swiper-button-next',
+        scrollbar: '.swiper-scrollbar',
+        mousewheelControl: true,
+        observeParents: true,
+        // if you need use plugins in the swiper, you can config in here like this
+        // 如果自行设计了插件，那么插件的一些配置相关参数，也应该出现在这个对象中，如下debugger
+        debugger: true,
+          // swiper callbacks
+          // swiper的各种回调函数也可以出现在这个对象中，和swiper官方一样
+        onTransitionStart (swiper) {
+          console.log(swiper)
+        }
+        // more Swiper configs and callbacks...
+        // ...
+      }
+    }
+  },
+  computed: {
+    show () {
+      return this.$store.state.autoInfo.isLogined
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
+@import "../../assets/sass_tool/base.scss";
+@import "../../assets/sass_tool/_size.scss";
+@import "../../assets/sass_tool/_center.scss";
+.my-swiper{
+  @include size(100%);
+}
+
+main{
+	.img-container{
+		@include size(100%,250px);
+		img{
+			@include size(100%);
+		}
+	}
+	.name{
+		width:90%;
+		padding:10px;
+		font-size:20px;
+		word-wrap: break-word; 
+		word-break: normal; 
+		font-family: Tahoma,Helvetica,Arial,"\5b8b\4f53",sans-serif;
+	}
+	.price{
+		color: #ea301c;
+    	padding:0 10px;
+    	font-size: 26px;
+    	span{
+    		font-size: 20px;
+    	}
+	}
+	.time{
+		color: #888;
+		padding:5px 12px;
+    	font-size: 13px;
+	}
+	.hr{
+		background:#ccc;
+		@include size(100%,15px);
+		opacity:.4;
+	}
+	.contact{
+		line-height:20px;
+		margin:10px;
+		.value{
+			float:right;
+			margin-right:10px;
+		}
+	}
+	.tip{
+		padding:10px;
+		hr{
+			margin:10px 0;
+			opacity:.5;
+		}
+	}
+	dl{
+		padding:10px;
+		margin-bottom:30px;
+		dt{
+			color:#888;
+			font-size:15px;
+		}
+		hr{
+			margin:10px 0;
+			opacity:.5;
+		}
+	}
+
+}
+
 </style>

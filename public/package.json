@@ -16,6 +16,7 @@
     "node-sass": "^4.1.1",
     "sass-loader": "^4.1.1",
     "vue": "^2.1.0",
+    "vue-awesome-swiper": "^2.4.0",
     "vue-router": "^2.3.0",
     "vuex": "^2.2.1"
   },
