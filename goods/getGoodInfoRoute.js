@@ -7,7 +7,6 @@ const query = require('../lib/query')
 router.use(query())
 
 
-let moment = require('moment')
 const queryGood = require('./queryGood')
 
 const baseImgUrl = require('./baseImgUrl')
