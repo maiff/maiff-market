@@ -18,7 +18,7 @@ describe('add', () => {
         price: 100,
         contactType: 'QQ',
         contactValue: '15216852305',
-        detail: 'only to test',
+        detail: '<script>only to test</script>',
         imgUrl: 'test||test'
       })
       // .expect('Content-Type', /json/)
@@ -101,7 +101,7 @@ describe('add', () => {
         price: 100,
         contactType: 'QQw',
         contactValue: '15216852305',
-        detail: 'only to test',
+        detail: '<script>only to test</script>',
         imgUrl: 'test||test'
       })
       // .expect('Content-Type', /json/)

@@ -3,7 +3,6 @@ let router = require('../lib/MyExpress')()
 const cookieParser = require('cookie-parser')
 router.use(cookieParser())
 
-
 const bodyParser = require('body-parser')
 const sendJson = require('../lib/sendJson')
 router.use(bodyParser.urlencoded({ extended: false }))
@@ -19,19 +18,18 @@ let getOnlineUserNum = require('../login/getOnlineUserNum')
 
 let maintainTie = require('../goodsAndUser/maintainTie')
 
+const xss = require('xss')
 router.post((req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
   if (isAuto(req.cookies, res)) {
-    let goodInformation = {};
-    ({
-      name: goodInformation.name,
-      price: goodInformation.price,
-      detail: goodInformation.detail
-    } = req.body)
+    let goodInformation = {}
+    goodInformation.name = xss(req.body.name)
+    goodInformation.detail = xss(req.body.detail)
+    goodInformation.price = req.body.price
 
     goodInformation.contact = {
       what: req.body.contactType,
-      is: req.body.contactValue
+      is: xss(req.body.contactValue)
     }
 
     goodInformation.imgUrl = req.body.imgUrl.split('||')

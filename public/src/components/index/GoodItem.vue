@@ -1,21 +1,22 @@
 <template>
     <div class="good-item">
                 <div class="container">
-                    <img class="thumbnail" src="http://findfun.oss-cn-shanghai.aliyuncs.com/storeItem/1480223588159.jpg">
+                    <img class="thumbnail" :src="imgUrl">
                     <div class="center-container">
-                        <h3>我是大肥我是大肥我是大肥我是大肥我是大肥我是大肥</h3>
-                        <span class="time">两天前</span>
+                        <h3>{{name}}</h3>
+                        <span class="time">{{time}}</span>
                         <span class="campus">松江校区</span>
                     </div>
                 </div>
                 <div class="price">
-                    100￥
+                    {{price}}￥
                 </div>
     </div>
 </template>
 <script>
 export default {
-  name: 'goodItem'
+  name: 'goodItem',
+  props: ['name', 'time', 'imgUrl', 'price']
 }
 </script>
 <style lang="scss" scoped>

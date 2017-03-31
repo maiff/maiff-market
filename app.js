@@ -31,7 +31,11 @@ app.use('/uploadimg', uploadImg)
 
 const addGood = require('./goods/addGoodRoute')
 app.use('/addGood', addGood)
+const getGoodInfo = require('./goods/getGoodInfoRoute')
+app.use('/getGoodInfo', getGoodInfo)
 
+const getGoodInfoDetail = require('./goods/getGoodInfoDetail')
+app.use('/getGoodInfoDetail', getGoodInfoDetail)
 app.listen(port, () => {
   logger.trace(`listen on ${port}`)
 })
