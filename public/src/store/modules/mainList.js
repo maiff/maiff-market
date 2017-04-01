@@ -1,7 +1,8 @@
 const mainList = {
   state: {
     mainList: [],
-    count: 1
+    count: 1,
+    myList: []
   },
   mutations: {
     pushMain (state, value) {
@@ -9,6 +10,9 @@ const mainList = {
     },
     pushList (state, List) {
       state.mainList.push(...List)
+    },
+    modifyMyList (state, List) {
+      state.myList = List
     },
     addCount (state) {
       state.count++

@@ -12,13 +12,32 @@
                     <div class="price">
                         {{price}}￥
                     </div>
+                    <div class="delete" v-show="deleteShow" @click.stop.prevent="deleteItem(goodId)">X</div>
         </div>
     </router-link>
 </template>
 <script>
+import Cookies from 'js.cookie'
+import post from '../common/post.js'
+import baseUrl from '../common/baseUrl.js'
 export default {
   name: 'goodItem',
-  props: ['name', 'time', 'imgUrl', 'price', 'goodId']
+  props: ['name', 'time', 'imgUrl', 'price', 'goodId'],
+  computed: {
+    deleteShow () {
+      return Cookies.get('name') === '向王涛'
+    }
+  },
+  methods: {
+    deleteItem (goodId) {
+      post(`${baseUrl}/delete`, {id: goodId}).then((res) => {
+        return res.data
+      })
+      .then((data) => {
+        data.status === 1 && window.alert('删除成功！')
+      })
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -27,6 +46,13 @@ export default {
 @import "../../assets/sass_tool/font.scss";
 @import "../../assets/sass_tool/_center.scss";
 .good-item{
+    .delete{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        font-size: 20px;
+    }
+    position:relative;
     color: black;
     @include size(100%,120px);
     display: flex;

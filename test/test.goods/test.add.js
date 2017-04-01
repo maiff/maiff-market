@@ -19,7 +19,7 @@ describe('add', () => {
         contactType: 'QQ',
         contactValue: '15216852305',
         detail: '<script>only to test</script>',
-        imgUrl: 'test||test'
+        imgUrl: 'http://7xpser.com1.z0.glb.clouddn.com/1480223588159.jpg||http://7xpser.com1.z0.glb.clouddn.com/1480223588159.jpg'
       })
       // .expect('Content-Type', /json/)
       // .expect(200)

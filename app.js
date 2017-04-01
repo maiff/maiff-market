@@ -36,6 +36,13 @@ app.use('/getGoodInfo', getGoodInfo)
 
 const getGoodInfoDetail = require('./goods/getGoodInfoDetail')
 app.use('/getGoodInfoDetail', getGoodInfoDetail)
+
+const getMyList = require('./goods/getMyListRoute')
+app.use('/getMyList', getMyList)
+
+const deleteRoute = require('./goods/deleteRoute')
+app.use('/delete', deleteRoute)
+
 app.listen(port, () => {
   logger.trace(`listen on ${port}`)
 })
