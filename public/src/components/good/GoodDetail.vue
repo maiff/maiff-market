@@ -35,11 +35,31 @@
       <hr>
       <dd>{{detail}}</dd>
     </dl>
+    <div class="hr"></div>
+    <div class="comment-container">
+      <div class="tip" v-show="!show">
+        <p>登录后查看发布评论</p>
+        <hr>
+      </div>
+      <div v-show="show" class="comment">
+        <textarea   placeholder="发布评论" v-model="commentContent"></textarea>
+        <input value="添加评论" type="button" @click="addComment()">
+        <ul>
+          <dl v-for="comment in commentList">
+            <dt>{{comment.name}}</dt>
+            <hr>
+            <dd>{{comment.content}}</dd>
+          </dl>
+        <ul>
+      </div>
+    </div>
   </main>
 </template>
 
 <script>
 import getDetail from './getDetail.js'
+import getCommentList from './getCommentList.js'
+import addComment from './addComment.js'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
   components: {
@@ -48,6 +68,8 @@ export default {
   },
   name: 'goodDetail',
   mounted () {
+    this.$store.commit('updateGoodId', this.$route.params.id)
+    this.$store.commit('clearComment')
     getDetail(this.$route.params.id).then((res) => {
       return res.data
     })
@@ -62,6 +84,13 @@ export default {
       this.value = data.contact.is + (this.$store.state.autoInfo.isLogined ? '' : 'XXXXXXXX')
       this.type = data.contact.what
       this.imgUrl = data.imgUrl
+    })
+    getCommentList(this.$route.params.id).then((res) => {
+      return res.data
+    })
+    .then((data) => {
+      console.log(data)
+      this.$store.commit('updateCommentList', data)
     })
   },
   data () {
@@ -107,8 +136,41 @@ export default {
     }
   },
   computed: {
+    commentList () {
+      return this.$store.state.comment.commentList
+    },
     show () {
       return this.$store.state.autoInfo.isLogined
+    },
+    commentContent: {
+      get () {
+        return this.$store.state.comment.commentContent
+      },
+      set (value) {
+        this.$store.commit('addComment', value)
+      }
+    }
+  },
+  methods: {
+    addComment () {
+      if (this.$store.state.comment.commentContent === '') window.alert('必须要有评论！')
+      else {
+        addComment().then((res) => {
+          return res.data
+        })
+        .then((data) => {
+          if (data.status === 1) {
+            getCommentList(this.$route.params.id).then((res) => {
+              return res.data
+            })
+            .then((data) => {
+              console.log(data)
+              this.$store.commit('updateCommentList', data)
+              this.$store.commit('clearComment')
+            })
+          }
+        })
+      }
     }
   }
 }
@@ -183,5 +245,13 @@ main{
 	}
 
 }
+.comment{
+  padding: 10px;
+  textarea{
+    margin: 10px auto;
+    width: 100%;
+  }
+}
+
 
 </style>

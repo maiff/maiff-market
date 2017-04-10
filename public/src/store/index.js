@@ -5,6 +5,7 @@ import autoInfo from './modules/autoInfo'
 import register from './modules/register'
 import goodInfo from './modules/goodInfo'
 import mainList from './modules/mainList'
+import comment from './modules/comment'
 
 Vue.use(Vuex)
 const store = new Vuex.Store({
@@ -13,7 +14,8 @@ const store = new Vuex.Store({
     autoInfo: autoInfo,
     register: register,
     goodInfo: goodInfo,
-    mainList: mainList
+    mainList: mainList,
+    comment: comment
   }
 })
 

@@ -43,6 +43,13 @@ app.use('/getMyList', getMyList)
 const deleteRoute = require('./goods/deleteRoute')
 app.use('/delete', deleteRoute)
 
+
+const addCommentRoute = require('./comment/addCommentRoute')
+app.use('/addComment', addCommentRoute)
+
+const getCommentFormGoodIdRoute = require('./comment/getCommentFormGoodIdRoute')
+app.use('/getCommentFormById', getCommentFormGoodIdRoute)
+
 app.listen(port, () => {
   logger.trace(`listen on ${port}`)
 })
