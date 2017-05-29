@@ -14,6 +14,11 @@ export default {
   components: {
     CommonHead,
     RegistForm
+  },
+  methods: {
+    close () {
+      this.$router.push('/')
+    }
   }
 }
 </script>

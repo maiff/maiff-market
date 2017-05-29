@@ -1,27 +1,15 @@
 <template>
   <div>
     <form id="form" v-on:submit.prevent="submit">
-      <div class="input-field">
-        <label>名&nbsp;&nbsp;&nbsp;&nbsp;称：</label>
-        <input type="text"  placeholder="名称必填" v-model="name">
-      </div>
-      <div class="input-field">
-        <label>价&nbsp;&nbsp;&nbsp;&nbsp;格：</label>
-        <input type="number"  placeholder="价格大于0" v-model="price">
-      </div>
-      <div class="input-field">
-        <select v-model="contactType">
-          <option value="QQ">QQ</option>
-          <option value="WX">WX</option>
-          <option value="phone">phone</option>
-        </select>
-        <input type="number"  placeholder="联系方式" v-model="contactValue">
-      </div>
-      <div class="input-field">
-        <label>描&nbsp;&nbsp;&nbsp;&nbsp;述：</label>
-        <textarea   placeholder="输入物品描述……" v-model="goodDetail">
-        </textarea>
-      </div>
+      <mu-text-field label="名称" hintText="请输入名称" type="text" v-model="name" labelFloat fullWidth /><br/>
+      <mu-text-field label="价格" hintText="价格大于0" type="text" v-model="price" labelFloat fullWidth /><br/>
+      <mu-select-field v-model="contactType" label="选择联系类型" fullWidth>
+        <mu-menu-item value="QQ" title="QQ"/>
+        <mu-menu-item value="WX" title="WX"/>
+        <mu-menu-item value="phone" title="phone"/>
+      </mu-select-field>
+      <mu-text-field label="联系方式" hintText="填写符合上述种类的联系方式" type="text" v-model="contactValue" labelFloat fullWidth /><br/>      
+      <mu-text-field label="描述" hintText="输入物品描述……" multiLine :rows="3" :rowsMax="6" v-model="goodDetail" labelFloat fullWidth/><br/>
       <div class="file-field">
           <div class="img-container" v-for="img in imgList" :style="'background-image:url(' + img + ')'">
           </div>
@@ -30,9 +18,8 @@
           </i>
           <input type="file" accept="image/*" @change="upload($event)">
         </div>
-      </textarea>
       </div>
-      <input type="submit" value="提交" >
+      <mu-raised-button label="提交" class="demo-raised-button" primary fullWidth @click="submit()"/>
     </form> 
   </div>
 </template>

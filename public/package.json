@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "axios": "^0.15.3",
+    "muse-ui": "^2.0.3",
     "node-sass": "^4.1.1",
     "sass-loader": "^4.1.1",
     "vue": "^2.1.0",

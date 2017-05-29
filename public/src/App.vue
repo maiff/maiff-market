@@ -1,20 +1,24 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <transition name="slide-fade">
+      <router-view></router-view>
+    </transition>
+    <Toast></Toast>
   </div>
 </template>
 
 <script>
 import Index from './components/Index'
 import Login from './components/Login'
-
+import Toast from './components/common/toast'
 import Cookies from 'js.cookie'
 
 export default {
   name: 'app',
   components: {
     Index,
-    Login
+    Login,
+    Toast
   },
   beforeCreate () {
     if (this.$store.state.autoInfo.isLogined === false && Cookies.get('sessionId') !== null && Cookies.get('name') !== null) {
@@ -28,8 +32,14 @@ export default {
 <style lang="scss">
 @import "./assets/sass_tool/base.scss";
 @import "./assets/sass_tool/normalize.scss";
-#app {  
-  font-family: '微软雅黑', Helvetica, Arial, sans-serif;
+.slide-fade-enter-active {
+  transition: all .3s ease;
 }
-
+.slide-fade-leave-active {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-active {
+  transform: translateX(10px);
+  opacity: 0;
+}
 </style>

@@ -1,12 +1,7 @@
 <template>
-  <header>
-    <span class="back" @click="back()">
-        <i class="arrow icon-arrow-copy"></i>
-    </span>
-    <span class="title">
-      {{title}}
-    </span>
-  </header>
+  <mu-appbar :title="title">
+      <mu-icon-button icon="keyboard_arrow_left" slot="left" @click="back" />
+  </mu-appbar>
 </template>
 
 <script>
@@ -23,27 +18,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-    @import "../../assets/sass_tool/base.scss";
-    @import "../../assets/sass_tool/_size.scss";
-    @import "../../assets/sass_tool/font.scss";
-    @import "../../assets/sass_tool/_center.scss";
-    header{
-        line-height: 60px;
-        position: relative;
-        background: $maincolor;
-    
-        @include size(100%,60px);
-        color:#fff;
-        .title{
-          font-size:20px;
-          @include center();   
-        }
-        .back{
-          float: left;
-          padding-left: 20px;
-        }
-
-}
-</style>

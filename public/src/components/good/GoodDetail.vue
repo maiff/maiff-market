@@ -11,48 +11,52 @@
         <div class="swiper-scrollbar"   slot="scrollbar"></div>
       </swiper>
     </div>
-    <div class="name">
-      {{name}}
-    </div>
-    <div class="price">
-        <span>￥</span>{{price}}
-    </div>
-    <div class="time">
-        发布：{{time}}
-    </div>
-    <div class="hr"></div>
-    <div class="contact">
+    <mu-paper class="maiff-paper" :zDepth="2">
+      <div class="name">
+        {{name}}
+      </div>
+      <div class="price">
+          <span>￥</span>{{price}}
+      </div>
+      <div class="time">
+          发布：{{time}}
+      </div>
+    </mu-paper>
+    <mu-paper class="maiff-paper contact" :zDepth="2">
       <div class="tip" v-show="!show">
         <p>登录后查看全部</p>
-        <hr>
+        <mu-divider />
       </div>
       <span class="name">{{ownName}}</span>
       <span class="value">{{type}}:{{value}}</span>
-    </div>
-    <div class="hr"></div>
-    <dl>
-      <dt>物品详情：</dt>
-      <hr>
-      <dd>{{detail}}</dd>
-    </dl>
-    <div class="hr"></div>
-    <div class="comment-container">
-      <div class="tip" v-show="!show">
-        <p>登录后查看发布评论</p>
-        <hr>
+    </mu-paper>
+    <mu-paper class="maiff-paper" :zDepth="2">
+      <dl>
+        <dt>物品详情：</dt>
+        <mu-divider />
+        <dd>{{detail}}</dd>
+      </dl>
+    </mu-paper>    
+    <mu-paper class="maiff-paper" :zDepth="2">
+      <div class="comment-container">
+        <div class="tip" v-show="!show">
+          <p>登录后查看发布评论</p>
+          <mu-divider />
+        </div>
+        <div v-show="show" class="comment">
+          <mu-text-field hintText="发布评论" multiLine :rows="3" :rowsMax="6" v-model="commentContent" fullWidth/><br/>
+          
+          <mu-raised-button label="添加评论" class="addButton" @click="addComment()" primary/>
+          <ul>
+            <dl v-for="comment in commentList">
+              <dt>{{comment.name}}</dt>
+              <hr>
+              <dd>{{comment.content}}</dd>
+            </dl>
+          <ul>
+        </div>
       </div>
-      <div v-show="show" class="comment">
-        <textarea   placeholder="发布评论" v-model="commentContent"></textarea>
-        <input value="添加评论" type="button" @click="addComment()">
-        <ul>
-          <dl v-for="comment in commentList">
-            <dt>{{comment.name}}</dt>
-            <hr>
-            <dd>{{comment.content}}</dd>
-          </dl>
-        <ul>
-      </div>
-    </div>
+    </mu-paper>    
   </main>
 </template>
 
@@ -182,8 +186,12 @@ export default {
 .my-swiper{
   @include size(100%);
 }
+.maiff-paper {
+  margin-bottom: 10px;
+}
 
 main{
+  background: #eee !important;
 	.img-container{
 		@include size(100%,250px);
 		img{
@@ -212,13 +220,13 @@ main{
     	font-size: 13px;
 	}
 	.hr{
-		background:#ccc;
+		background:#eee;
 		@include size(100%,15px);
 		opacity:.4;
 	}
 	.contact{
+    padding: 10px;
 		line-height:20px;
-		margin:10px;
 		.value{
 			float:right;
 			margin-right:10px;
@@ -233,7 +241,6 @@ main{
 	}
 	dl{
 		padding:10px;
-		margin-bottom:30px;
 		dt{
 			color:#888;
 			font-size:15px;
